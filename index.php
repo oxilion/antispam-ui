@@ -63,7 +63,7 @@ if (!user::isLoggedIn()) {
 		$access = $u->getAccess();
 		if (count($access) > 0) {
 			foreach ($access As $key => $item) {
-				$tmp = new tpl('tpl/home_access_line.htm');
+				$domain_tpl = new tpl('tpl/home_access_line.htm');
 
 				$ad = new antispamDomain($as->client, $item['domain']);
 				$addr = $ad->getAddresses();
@@ -76,37 +76,37 @@ if (!user::isLoggedIn()) {
 					foreach ($addr->addresses As $id => $address) {
 						if ($u->hasAccess($address)) {
 							if (count($ad->getQuarantaine($address)->quarantaine) == 0) {
-								$tmp2 = new tpl('tpl/home_access_nospam.html');
+								$addr_tpl = new tpl('tpl/home_access_nospam.html');
 							}
 							else {
-								$tmp2 = new tpl('tpl/home_access_spam.htm');
+								$addr_tpl = new tpl('tpl/home_access_spam.htm');
 
 								$lines = '';
 								foreach ($ad->getQuarantaine($address)->quarantaine As $obj => $s) {
-									$tmp3 = new tpl('tpl/home_access_spam_line.htm');
+									$line_tpl = new tpl('tpl/home_access_spam_line.htm');
 									$from = substr($s->from, 0, strpos($s->from, '<')); // Since not everybody has the PECL lib
-									$tmp3->assign('from', htmlspecialchars($from, ENT_QUOTES));
-									$tmp3->assign('subject', htmlspecialchars($s->subject, ENT_QUOTES));
-									$tmp3->assign('type', $s->type);
-									$tmp3->assign('time', substr($s->time,0,10));
-									$tmp3->assign('reason', $s->smtp_resp);
+									$line_tpl->assign('from', htmlspecialchars($from, ENT_QUOTES));
+									$line_tpl->assign('subject', htmlspecialchars($s->subject, ENT_QUOTES));
+									$line_tpl->assign('type', $s->type);
+									$line_tpl->assign('time', substr($s->time,0,10));
+									$line_tpl->assign('reason', $s->smtp_resp);
 
 									// Javascript doesn't support a plus sign in the id.
-									$tmp3->assign('key', str_replace('+', '_', $s->secret_id));
-									$tmp3->assign('id', str_replace('+', '_', $s->mail_id));
-									$lines .= $tmp3->get();
+									$line_tpl->assign('key', str_replace('+', '_', $s->secret_id));
+									$line_tpl->assign('id', str_replace('+', '_', $s->mail_id));
+									$lines .= $line_tpl->get();
 								}
 							}
-							$tmp2->assign('lines', $lines);
-							$tmp2->assign('address', $address);
-							$users .= $tmp2->get();
+							$addr_tpl->assign('lines', $lines);
+							$addr_tpl->assign('address', $address);
+							$users .= $addr_tpl->get();
 						}
 					}
 				}
-				$tmp->assign('users', $users);
-				$tmp->assign('aantal', $nrAdr);
-				$tmp->assign('domain', $item['domain']);
-				$sAccess .= $tmp->get();
+				$domain_tpl->assign('users', $users);
+				$domain_tpl->assign('aantal', $nrAdr);
+				$domain_tpl->assign('domain', $item['domain']);
+				$sAccess .= $domain_tpl->get();
 			}
 		} else {
 			$sAccess = 'Geen domeinen';
