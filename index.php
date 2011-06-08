@@ -62,49 +62,46 @@ if (!user::isLoggedIn()) {
 		$sAccess = '';
 		$access = $u->getAccess();
 		if (count($access) > 0) {
-			foreach ($access As $key => $item) {
+			foreach ($access As $item) {
 				$domain_tpl = new tpl('tpl/home_access_line.htm');
 
 				$ad = new antispamDomain($as->client, $item['domain']);
-				$addr = $ad->getAddresses();
-
-				$nrAdr = count($addr->addresses);
+				$addresses = $ad->getAddresses()->addresses;
 
 				// Per user at this domain, show the dirty work
 				$users = '';
-				if ($nrAdr > 0) {
-					foreach ($addr->addresses As $id => $address) {
-						if ($u->hasAccess($address)) {
-							if (count($ad->getQuarantaine($address)->quarantaine) == 0) {
-								$addr_tpl = new tpl('tpl/home_access_nospam.html');
-							}
-							else {
-								$addr_tpl = new tpl('tpl/home_access_spam.htm');
+				foreach ($addresses as $address) {
+					if ($u->hasAccess($address)) {
+						if (count($ad->getQuarantaine($address)->quarantaine) == 0) {
+							$addr_tpl = new tpl('tpl/home_access_nospam.html');
+						}
+						else {
+							$addr_tpl = new tpl('tpl/home_access_spam.htm');
 
-								$lines = '';
-								foreach ($ad->getQuarantaine($address)->quarantaine As $obj => $s) {
-									$line_tpl = new tpl('tpl/home_access_spam_line.htm');
-									$from = substr($s->from, 0, strpos($s->from, '<')); // Since not everybody has the PECL lib
-									$line_tpl->assign('from', htmlspecialchars($from, ENT_QUOTES));
-									$line_tpl->assign('subject', htmlspecialchars($s->subject, ENT_QUOTES));
-									$line_tpl->assign('type', $s->type);
-									$line_tpl->assign('time', substr($s->time,0,10));
-									$line_tpl->assign('reason', $s->smtp_resp);
+							$lines = '';
+							foreach ($ad->getQuarantaine($address)->quarantaine As $obj => $s) {
+								$line_tpl = new tpl('tpl/home_access_spam_line.htm');
+								$from = substr($s->from, 0, strpos($s->from, '<')); // Since not everybody has the PECL lib
+								$line_tpl->assign('from', htmlspecialchars($from, ENT_QUOTES));
+								$line_tpl->assign('subject', htmlspecialchars($s->subject, ENT_QUOTES));
+								$line_tpl->assign('type', $s->type);
+								$line_tpl->assign('time', substr($s->time,0,10));
+								$line_tpl->assign('reason', $s->smtp_resp);
 
-									// Javascript doesn't support a plus sign in the id.
-									$line_tpl->assign('key', str_replace('+', '_', $s->secret_id));
-									$line_tpl->assign('id', str_replace('+', '_', $s->mail_id));
-									$lines .= $line_tpl->get();
-								}
+								// Javascript doesn't support a plus sign in the id.
+								$line_tpl->assign('key', str_replace('+', '_', $s->secret_id));
+								$line_tpl->assign('id', str_replace('+', '_', $s->mail_id));
+								$lines .= $line_tpl->get();
 							}
 							$addr_tpl->assign('lines', $lines);
-							$addr_tpl->assign('address', $address);
-							$users .= $addr_tpl->get();
 						}
+						$addr_tpl->assign('address', $address);
+						$users .= $addr_tpl->get();
 					}
 				}
+
 				$domain_tpl->assign('users', $users);
-				$domain_tpl->assign('aantal', $nrAdr);
+				$domain_tpl->assign('aantal', count($addresses));
 				$domain_tpl->assign('domain', $item['domain']);
 				$sAccess .= $domain_tpl->get();
 			}
