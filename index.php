@@ -92,12 +92,8 @@ if (!user::isLoggedIn()) {
 									$tmp3->assign('reason', $s->smtp_resp);
 
 									// Javascript doesn't support a plus sign in the id.
-									$secret_id = $s->secret_id;
-									$mail_id = $s->mail_id;
-									$secret_id = str_replace('+', '_', $secret_id);
-									$mail_id = str_replace('+', '_', $mail_id);
-									$tmp3->assign('key', $secret_id);
-									$tmp3->assign('id', $mail_id);
+									$tmp3->assign('key', str_replace('+', '_', $s->secret_id));
+									$tmp3->assign('id', str_replace('+', '_', $s->mail_id));
 									$lines .= $tmp3->get();
 								}
 							}
