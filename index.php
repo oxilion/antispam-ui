@@ -21,40 +21,39 @@ if (!user::isLoggedIn()) {
 } else {
 	// User is logged in.
 	if (isset($_GET['action'])) {
+		$asm = new antispamMail($as->client, $_GET['id'], $_GET['key']);
+		$main = new tpl('tpl/respons.htm');
+
 		// Security consideration: In this application we consider the combination 
 		// id and key strong enough as authentication.
 		switch ($_GET['action']) {
 
 		case 'release' :
-			$asm = new antispamMail($as->client, $_GET['id'], $_GET['key']);
 			if ($asm->release($_GET['to']) && $asm->delete()) {
-				$main = new tpl('tpl/respons.htm');
 				$main->assign('result', 'ack');
 				$main->assign('msg', 'Het bericht wordt afgeleverd en is verwijderd.');
-				echo $main->get();
 			} else {
-				$main = new tpl('tpl/respons.htm');
 				$main->assign('result', 'nack');
 				$main->assign('msg', 'Sorry, er is iets fout gegaan.');
-				echo $main->get();
 			}
 			break;
 
 		case 'delete' :
-			$asm = new antispamMail($as->client, $_GET['id'], $_GET['key']);
 			if ($asm->delete()) {
-				$main = new tpl('tpl/respons.htm');
 				$main->assign('result', 'ack');
 				$main->assign('msg', 'Het bericht is verwijderd.');
-				echo $main->get();
 			} else {
-				$main = new tpl('tpl/respons.htm');
 				$main->assign('result', 'nack');
 				$main->assign('msg', 'Sorry, er is iets fout gegaan.');
-				echo $main->get();
 			}
 			break;
+
+		default:
+			$main->assign('result', 'nack');
+			$main->assign('msg', 'Onbekend actie.');
+			break;
 		}
+		echo $main->get();
 	} else {
 		$main = new tpl('tpl/home.htm');
 		$u = new user($_SESSION['uid']);
