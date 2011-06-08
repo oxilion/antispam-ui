@@ -12,10 +12,14 @@ if (!user::isLoggedIn()) {
 			header("Location: ". ABSOLUTE_URL);
 			die();
 		} else {
-			echo "Couldn't login";
+			$error_tpl = new tpl('tpl/error.htm');
+			$error_tpl->assign('error', 'Ongeldige gebruikersnaam en/of wachtwoord.');
+			$error_msg = $error_tpl->get();
 		}
 	}
+
 	$main = new tpl('tpl/login.htm');
+	$main->assign('error', isset($error_msg) ? $error_msg : '');
 	$body->assign('main', $main->get());
 	echo $body->get();
 } else {

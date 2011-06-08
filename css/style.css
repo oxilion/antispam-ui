@@ -47,6 +47,11 @@ input {
 	margin-left: 100px;
 	margin-top: 50px;
 }
+.error {
+	margin: 1em;
+	padding: 3px;
+	background-color: yellow;
+}
 .ui-accordion .ui-accordion-header { cursor: pointer; position: relative; margin-top: 1px; zoom: 1; }
 .ui-accordion .ui-accordion-li-fix { display: inline; }
 .ui-accordion .ui-accordion-header-active { border-bottom: 0 !important; }
