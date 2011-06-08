@@ -1,0 +1,21 @@
+<?php
+
+/*
+ * In order to use your existing system, please provide us the following information.
+ */
+define('USER', 0);
+define('PASS', 'yourpassword');
+define('DB_HOST', 'localhost');
+define('DB_USER', 'dbUser');
+define('DB_PASS', 'dbPasswd');
+define('DB_NAME', 'dbName');
+define('USER_TABLE', 'user');
+define('USER_USERFIELD', 'userId');
+define('USER_PASSFIELD', 'password');
+define('ACCOUNT_TABLE', 'account');	// Should have the fields:	userId, domain and address
+define('ABSOLUTE_URL', '');
+
+// Is the system live or in debug mode?
+define('LIVE', false);
+
+$wsdl = 'https://as-api.oxilion.nl/api/as.wsdl';

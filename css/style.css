@@ -1,0 +1,157 @@
+* {
+	font-family: Verdana;
+	font-size: 12px;
+}
+body{
+	background-image: url("../img/background.jpg");
+	background-attachment: fixed;
+	background-position: top right;
+	background-repeat: no-repeat;
+	margin: 0;
+}
+h1 {
+	font-size: 15px;
+	font-weight: bold;
+	color: #0075C6;
+}
+input {
+	border: 1px solid #0075C6;
+	background-color: white;
+}
+#menu {
+	position: absolute;
+	top: 150px;
+	left: 10px;
+	border: 1px solid #BDDFFF;
+	width: 200px;
+	min-height: 300px;
+	background-color: white;
+	padding: 10px;
+}
+#main {
+	position: absolute;
+	top: 100px;
+	left:	250px;
+	padding: 10px;
+	width: 800px;
+	background-color: white;
+	min-height: 500px;
+	border: 1px solid #BDDFFF;
+}
+.rounded {
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius: 5px;
+}
+.loginTable {
+	margin-left: 100px;
+	margin-top: 50px;
+}
+.ui-accordion .ui-accordion-header { cursor: pointer; position: relative; margin-top: 1px; zoom: 1; }
+.ui-accordion .ui-accordion-li-fix { display: inline; }
+.ui-accordion .ui-accordion-header-active { border-bottom: 0 !important; }
+.ui-accordion .ui-accordion-header a { display: block; font-size: 1em; padding: .5em .5em .5em 2.2em; }
+.ui-accordion .ui-accordion-header .ui-icon { position: absolute; left: .5em; top: 50%; margin-top: -8px; }
+.ui-accordion .ui-accordion-content { padding: 10px 10px; border-top: 0; margin-top: -2px; position: relative; top: 1px; margin-bottom: 2px; overflow: auto; display: none; }
+.ui-accordion .ui-accordion-content-active { display: block; }
+
+.ui-dialog { 
+	position: absolute;
+	padding: 10px; 
+	width: 300px;
+	min-height: 175px;
+	z-index: 5;
+	background-color: white;
+	border: 1px solid #D6D3CE;
+	border-right: 2px solid #D6D3CE;
+	border-bottom: 2px solid #D6D3CE;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius: 5px;
+}
+.ui-dialog .ui-dialog-titlebar { padding: .5em .3em .3em 1em; position: relative;  }
+.ui-dialog .ui-dialog-title { float: left; margin: .1em 0 .2em; font-weight: bold; color: #0075C6;} 
+.ui-dialog .ui-dialog-titlebar-close { position: absolute; right: .3em; top: 50%; width: 19px; margin: 10px 0 0 0; padding: 1px; height: 18px; }
+.ui-dialog .ui-dialog-titlebar-close span { display: none; margin: 1px; }
+.ui-dialog .ui-dialog-titlebar-close:hover, .ui-dialog .ui-dialog-titlebar-close:focus { padding: 0; }
+.ui-dialog .ui-dialog-content { border: 0; padding: .5em 1em; background: none; overflow: auto; }
+.ui-dialog .ui-dialog-buttonpane { text-align: left; border-width: 1px 0 0 0; background-image: none; margin: 50px 0 0 0; padding: .3em 1em .5em .4em; }
+.ui-dialog .ui-dialog-buttonpane button { float: left; margin: 50px .4em .5em 0; cursor: pointer; padding: .2em .6em .3em .6em; line-height: 1.4em; width:auto; overflow:visible; }
+.ui-dialog .ui-resizable-se { width: 14px; height: 14px; right: 3px; bottom: 3px; }
+.ui-draggable .ui-dialog-titlebar { cursor: move; }
+.ui-widget-overlay { 
+	background-color: black;
+	repeat-x; 
+	opacity: .50;
+	filter:Alpha(Opacity=50); 
+}
+.ui-dialog input {
+	height: 17px;
+	z-index: 1005 !important;
+}
+.ui-dialog button {
+	border: 1px solid #0075C6;
+	background-color: white;
+	font-weight: bold;
+	color: #0075C6;
+}
+.ui-accordion-header {
+	background-color: #C6CF33;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius: 5px;
+	color: #849A4A;
+}
+.ui-accordion-header a {
+	color: #FFFFFF;
+}
+.ui-accordion-content {
+	background-color: #DFF0FF;
+}
+.listNumber {
+	position: absolute;
+	left: 250px;
+}
+.spamLine {
+	background-color: white;
+	padding: 1px;
+	margin: 1px;
+	min-height: 21px;
+}
+.blok {
+	display: block;
+	width: 760px;
+	border: 1px solid #E7E3E7;
+	background-color: #FFFBFF;
+	padding: 5px;
+	overflow: hidden;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius: 5px;
+	margin: 2px;
+}
+.ackMsg {
+	background-image: url("../img/info.png");
+	background-repeat:no-repeat;
+	background-position: 10px 10px; 
+}
+.nackMsg {
+	background-image: url("../img/warning.png");
+	background-repeat:no-repeat;
+	background-position: 10px 10px; 
+}
+#responsBA {
+	position: fixed;
+	top: 10px;
+	left:	250px;
+	width: 735px;
+	min-height: 25px;
+	background-color: white;
+	padding: 10px;
+	padding-top: 15px;
+	padding-left: 75px;
+}
+.headTd {
+	color:  #9DCFFF;
+	font-weight: bold;
+}

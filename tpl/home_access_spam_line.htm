@@ -1,0 +1,43 @@
+<div id="{ID}" class="spamLine">
+	<table width="750px">
+		<tr>
+			<td width="250px">{FROM}</td>
+			<td width="250px">{SUBJECT}</td>
+                        <td width="55px" title="{REASON}">
+                            {TYPE}
+                            <img src="img/questionmark.jpg"/>
+                        </td>
+                        <td width="75px">{TIME}</td>
+			<td width="50px">
+				<img src="img/unlock.png" onClick="release('{ID}', '{KEY}');" title="E-mail alsnog afleveren" />
+				<img src="img/delete.png" onClick="remove('{ID}', '{KEY}');" title="E-mail verwijderen" />
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="release-{ID}" title="Doorlaten van bericht" class="verborgen ui-dialog">
+	<br /><br />
+		Waar moet de e-mail worden afgeleverd? <br /><br />
+			<input type="text" name="adres" id="emailadres-{ID}" size="40" value="{ADDRESS}" />
+		<br />
+</div>
+	<script type="text/javascript">
+	$(function() {
+		$("#release-{ID}").dialog({
+			bgiframe: true,
+			autoOpen: false,
+			buttons: {
+				Afleveren: function() {
+						email = $("#emailadres-{ID}").attr('value');
+						$(this).dialog('close');
+						$("#respons").load("?action=release&id={ID}&key={KEY}&to="+ email + "#responsBA");
+						$("#{ID}").hide(1000);
+				},
+				Annuleren: function() {
+					$(this).dialog('close');
+				}
+			}
+		});
+	});
+	</script>
+
