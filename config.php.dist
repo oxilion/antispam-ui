@@ -18,4 +18,4 @@ define('ABSOLUTE_URL', '');
 // Is the system live or in debug mode?
 define('LIVE', false);
 
-$wsdl = 'https://as-api.oxilion.nl/api/as.wsdl';
+$wsdl = 'https://as-api.oxilion.nl/api/as.wsdl'; // There is also a non-SSL version on http://
