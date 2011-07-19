@@ -25,4 +25,4 @@ if (USER == 0) {
 }
 
 $db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die($db->error);
-$as = new antispam(WSDL, USER, PASS);
+$as = new antispam($wsdl, USER, PASS);
