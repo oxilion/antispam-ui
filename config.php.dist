@@ -3,6 +3,7 @@
 /*
  * In order to use your existing system, please provide us the following information.
  */
+define('WSDL', 'https://as-api.oxilion.nl/api/as.wsdl'); // Also available on http://
 define('USER', 0);
 define('PASS', 'yourpassword');
 define('DB_HOST', 'localhost');
@@ -17,5 +18,3 @@ define('ABSOLUTE_URL', '');
 
 // Is the system live or in debug mode?
 define('LIVE', false);
-
-$wsdl = 'https://as-api.oxilion.nl/api/as.wsdl'; // There is also a non-SSL version on http://
