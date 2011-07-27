@@ -3,20 +3,22 @@ class antispamMail {
 
 	private $id = 0;
 	private $secret = '';
+	private $to;
 	public $client;
 	public $error = '';
 
-	public function __construct(&$client, $id, $secret) {
+	public function __construct(&$client, $id, $secret, $to) {
 		$this->id = str_replace('_', '+', $id);
 		$this->secret = str_replace('_', '+', $secret);
 		$this->client = $client;
+		$this->to = $to;
 	}
 
-	public function release($to) {
+	public function release() {
 		try {
 			$this->client->releaseMail(array('mail_id'=> $this->id,
 				'secret_id'=> $this->secret,
-				'to'=> $to));
+				'to'=> $this->to));
 			return true;
 		}
 		catch (Exception $e) {
@@ -26,11 +28,11 @@ class antispamMail {
 		}
 	}
 
-	public function delete($to) {
+	public function delete() {
 		try {
 			$this->client->deleteMail(array('mail_id'=> $this->id,
 				'secret_id'=> $this->secret,
-				'to'=> $to));
+				'to'=> $this->to));
 			return true;
 		}
 		catch (Exception $e) {
