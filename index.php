@@ -25,7 +25,7 @@ if (!user::isLoggedIn()) {
 } else {
 	// User is logged in.
 	if (isset($_GET['action'])) {
-		$asm = new antispamMail($as->client, $_GET['id'], $_GET['key']);
+		$asm = new antispamMail($as->client, $_GET['id'], $_GET['key'], $_GET['to']);
 		$main = new tpl('tpl/respons.htm');
 
 		// Security consideration: In this application we consider the combination 
@@ -33,7 +33,7 @@ if (!user::isLoggedIn()) {
 		switch ($_GET['action']) {
 
 		case 'release' :
-			if ($asm->release($_GET['to']) && $asm->delete($_GET['to'])) {
+			if ($asm->release() && $asm->delete()) {
 				$main->assign('result', 'ack');
 				$main->assign('msg', 'Het bericht wordt afgeleverd en is verwijderd.');
 			} else {
@@ -43,7 +43,7 @@ if (!user::isLoggedIn()) {
 			break;
 
 		case 'delete' :
-			if ($asm->delete($_GET['to'])) {
+			if ($asm->delete()) {
 				$main->assign('result', 'ack');
 				$main->assign('msg', 'Het bericht is verwijderd.');
 			} else {
