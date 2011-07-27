@@ -26,10 +26,11 @@ class antispamMail {
 		}
 	}
 
-	public function delete() {
+	public function delete($to) {
 		try {
 			$this->client->deleteMail(array('mail_id'=> $this->id,
-				'secret_id'=> $this->secret));
+				'secret_id'=> $this->secret,
+				'to'=> $to));
 			return true;
 		}
 		catch (Exception $e) {

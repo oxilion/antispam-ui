@@ -33,7 +33,7 @@ if (!user::isLoggedIn()) {
 		switch ($_GET['action']) {
 
 		case 'release' :
-			if ($asm->release($_GET['to']) && $asm->delete()) {
+			if ($asm->release($_GET['to']) && $asm->delete($_GET['to'])) {
 				$main->assign('result', 'ack');
 				$main->assign('msg', 'Het bericht wordt afgeleverd en is verwijderd.');
 			} else {
@@ -43,7 +43,7 @@ if (!user::isLoggedIn()) {
 			break;
 
 		case 'delete' :
-			if ($asm->delete()) {
+			if ($asm->delete($_GET['to'])) {
 				$main->assign('result', 'ack');
 				$main->assign('msg', 'Het bericht is verwijderd.');
 			} else {
