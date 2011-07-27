@@ -7,7 +7,7 @@ class user {
 
 	public function __construct($id = 0) {
 		global $db;
-		if ($id != 0) {
+		if ($id !== 0) {
 			$sql = "SELECT *
 				FROM ". USER_TABLE . "
 				WHERE ". USER_USERFIELD ." = '$id';";
@@ -28,7 +28,7 @@ class user {
 		global $db;
 		$sql = "SELECT *
 			FROM ". ACCOUNT_TABLE . "
-			WHERE userId = $this->userId
+			WHERE userId = '$this->userId'
 			GROUP BY domain
 			ORDER BY domain;";
 
@@ -50,7 +50,7 @@ class user {
 
 		$sql = "SELECT *
 			FROM ". ACCOUNT_TABLE . "
-			WHERE userId = $this->userId
+			WHERE userId = '$this->userId'
 			AND (domain = '$domain' AND address = '')
 			OR (domain = '$domain' AND address = '$address');";
 
@@ -63,7 +63,7 @@ class user {
 	 * @return bool
 	 */
 	static function isLoggedIn() {
-		return isset($_SESSION['uid']) && $_SESSION['uid'] != 0;
+		return isset($_SESSION['uid']) && $_SESSION['uid'] !== 0;
 	}
 
 	static function tryLogin($user, $pass) {
